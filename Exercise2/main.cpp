@@ -19,6 +19,9 @@ Vector2d QR(const Matrix2d& A, const Vector2d& b){
 
 int main()
 {
+	Vector2d x; //vettore unitario negativo (serve per calcolare errore relativo)
+	x << -1.0, -1.0;
+	
 	//Primo sistema
 	Matrix2d A_1;
 	A_1 << 5.547001962252291e-01, -3.770900990025203e-02,
@@ -33,9 +36,11 @@ int main()
 	cout << "La soluzione del sistema 1, usando PA=LU, è: " << scientific << setprecision(1) << x_lu_1.transpose() << endl;
 	cout << "La soluzione del sistema 1, usando QR, è: " << scientific << setprecision(1) << x_qr_1.transpose() << endl;
 	
-	double err_rel1 = (x_lu_1 - x_qr_1).norm()/x_lu_1.norm();
+	double err_rel1_lu = (x_lu_1 - x).norm()/x.norm();
+	double err_rel1_qr = (x_qr_1 - x).norm()/x.norm();
 	
-	cout << "L'errore relativo è: " << err_rel1 << "\n" << endl;
+	cout << "L'errore relativo di x calcolata con PA=LU è: " << err_rel1_lu << endl;
+	cout << "L'errore relativo di x calcolata con QR è: " << err_rel1_qr << "\n" << endl;
 	
 	//Secondo sistema
 	Matrix2d A_2;
@@ -51,9 +56,11 @@ int main()
 	cout << "La soluzione del sistema 2, usando PA=LU, è: " << scientific << setprecision(1) << x_lu_2.transpose() << endl;
 	cout << "La soluzione del sistema 2, usando QR, è: " << scientific << setprecision(1) << x_qr_2.transpose() << endl;
 	
-	double err_rel2 = (x_lu_2 - x_qr_2).norm()/x_lu_2.norm();
+	double err_rel2_lu = (x_lu_2 - x).norm()/x.norm();
+	double err_rel2_qr = (x_qr_2 - x).norm()/x.norm();
 	
-	cout << "L'errore relativo è: " << err_rel2 << "\n" << endl;
+	cout << "L'errore relativo di x calcolata con PA=LU è: " << err_rel2_lu << endl;
+	cout << "L'errore relativo di x calcolata con QR è: " << err_rel2_qr << "\n" << endl;
 	
 	//Terzo sistema
 	Matrix2d A_3;
@@ -69,10 +76,11 @@ int main()
 	cout << "La soluzione del sistema 3, usando PA=LU, è: " << scientific << setprecision(1) << x_lu_3.transpose() << endl;
 	cout << "La soluzione del sistema 3, usando QR, è: " << scientific << setprecision(1) << x_qr_3.transpose() << endl;
 	
-	double err_rel3 = (x_lu_3 - x_qr_3).norm()/x_lu_3.norm();
+	double err_rel3_lu = (x_lu_3 - x).norm()/x.norm();
+	double err_rel3_qr = (x_qr_3 - x).norm()/x.norm();
 	
-	cout << "L'errore relativo è: " << err_rel3 << "\n" << endl;
-	
+	cout << "L'errore relativo di x calcolata con PA=LU è: " << err_rel3_lu << endl;
+	cout << "L'errore relativo di x calcolata con QR è: " << err_rel3_qr << "\n" << endl;
 	
 	
     return 0;
